@@ -1,142 +1,169 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Catalyst Surface Atomic Model</title>
-<style>
-*{box-sizing:border-box}body{margin:0;padding:14px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f6f3;color:#1f2933}.app{max-width:880px;margin:auto}h1{font-size:1.55rem;margin:0 0 6px}.sub,.small,.foot{color:#586473}.card{background:#fff;border:1px solid #d8dde3;border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 4px 14px #0000000d}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.row.three{grid-template-columns:1fr 1fr 1fr}button{font:inherit;min-height:50px;border-radius:14px;border:1px solid #cfd6de;background:#fff;color:#1f2933;padding:10px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button.active,button.primary{background:#1f2933;color:#fff;border-color:#1f2933}button:active{transform:scale(.98)}.stage{background:linear-gradient(#eef5fb,#f8fafc);border:1px solid #d8dde3;border-radius:18px;padding:14px}.label{font-weight:800;margin-bottom:8px}.zone{border-radius:14px;padding:12px;min-height:84px;margin:10px 0;border:1px dashed #c8d0d9}.gas{background:#f8fbff}.surfzone{background:#eef8f3;border-color:#91c9aa}.products{background:#fffaf0;border-color:#e2c878}.surface{background:linear-gradient(135deg,#aeb4bd,#747b86);color:white;border-radius:16px;padding:14px;margin-top:10px;text-align:center;font-weight:800}.mols{display:flex;flex-wrap:wrap;gap:10px}.mol{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid #d7dde5;border-radius:999px;padding:8px 10px;box-shadow:0 2px 8px #0000000f;font-weight:800}.mol.stuck{background:#e7f6ee;border-color:#4f9d72}.atom{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;color:white;font-size:.8rem;font-weight:900}.C{background:#30363d}.O{background:#d94848}.H{background:#e8eef6;color:#344054;border:1px solid #c7d0dd}.bond{width:10px;height:3px;background:#6b7280;border-radius:99px}.title{font-size:1.15rem;font-weight:900;margin-bottom:6px}.eq{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f4f6f8;border:1px solid #d8dde3;border-radius:12px;padding:10px;overflow-x:auto;white-space:nowrap}.counters{display:grid;grid-template-columns:1fr 1fr;gap:10px}.counter{background:#f4f6f8;border:1px solid #d8dde3;border-radius:14px;padding:10px;text-align:center}.counter strong{display:block;font-size:1.4rem}.takeaway{border-left:4px solid #2b8a5f;background:#eef8f3;padding:10px 12px;border-radius:12px}.atomicBox{background:#fbfcfd;border:1px solid #d8dde3;border-radius:16px;padding:10px}#svg{width:100%;height:auto;display:block;background:linear-gradient(#f8fbfd,#f2f6f9);border-radius:12px;border:1px solid #e2e8ef}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.chip{background:#f4f6f8;border:1px solid #d8dde3;border-radius:999px;padding:7px 10px;font-size:.92rem;font-weight:700}.note{background:#f8fafb;border:1px solid #d8dde3;border-radius:12px;padding:10px;margin-top:10px}.legend{display:flex;flex-wrap:wrap;gap:8px 12px;margin-top:8px;color:#586473;font-size:.9rem}.legend span{display:inline-flex;align-items:center;gap:6px}.sw{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid #0003}.dash{width:18px;height:0;border-top:3px dashed #4f9d72;display:inline-block}@media(min-width:720px){.two{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;align-items:start}}
-</style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Interactive teaching model showing how a three-way catalytic converter transforms carbon monoxide, unburned hydrocarbons, and nitrogen oxides on a reusable metal surface." name="description"/>
+<title>How a Catalytic Converter Cleans Exhaust</title>
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="app">
-<h1>Metal Catalyst Surface Model</h1>
-<p class="sub">Tap through the steps. The top shows the simple flow; the atomic diagram shows how molecules stick, orient, react, and leave while the metal remains usable.</p>
-
-<div class="card">
-<div class="label">Choose example</div>
-<div class="row">
-<button id="coBtn" class="active" onclick="setReaction('co')">Carbon monoxide</button>
-<button id="hcBtn" onclick="setReaction('hc')">Hydrocarbon</button>
+<main class="app">
+<header class="hero">
+<p class="kicker">Interactive chemistry model</p>
+<h1>How a catalytic converter cleans exhaust</h1>
+<p class="hero-copy">Follow atoms from harmful combustion by-products to less harmful compounds. The model connects the big-picture exhaust change to the tiny surface events that make it happen.</p>
+<div aria-label="The three jobs of a three-way catalytic converter" class="overview">
+<div class="overview-item"><span class="number-badge">1</span><strong>Oxidize carbon monoxide</strong>Turns toxic CO into CO₂.<span class="mini-eq">CO + O → CO₂</span></div>
+<div class="overview-item"><span class="number-badge">2</span><strong>Oxidize unburned fuel</strong>Turns hydrocarbons into CO₂ and H₂O.<span class="mini-eq">HC + O₂ → CO₂ + H₂O</span></div>
+<div class="overview-item"><span class="number-badge">3</span><strong>Reduce nitrogen oxides</strong>Returns nitrogen atoms mainly to N₂.<span class="mini-eq">NOₓ → N₂</span></div>
 </div>
-<div class="row three">
-<button onclick="prev()">Back</button>
-<button class="primary" onclick="next()">Next</button>
-<button onclick="reset()">Reset</button>
+</header>
+<section aria-labelledby="controlsTitle" class="card controls">
+<h2 class="section-title" id="controlsTitle">Choose a reaction, then move through the surface cycle</h2>
+<p class="section-sub">The balanced-particle graph and atom ledger update with your choice.</p>
+<div aria-label="Reaction example" class="reaction-tabs" role="tablist">
+<button aria-controls="lesson" aria-selected="true" class="reaction-tab" data-reaction="co" id="coBtn" role="tab">Carbon monoxide<span>CO oxidation</span></button>
+<button aria-controls="lesson" aria-selected="false" class="reaction-tab" data-reaction="hc" id="hcBtn" role="tab">Unburned hydrocarbon<span>fuel oxidation</span></button>
+<button aria-controls="lesson" aria-selected="false" class="reaction-tab" data-reaction="nox" id="noxBtn" role="tab">Nitrogen oxides<span>NOₓ reduction</span></button>
+</div>
+<ol aria-label="Catalytic cycle steps" class="stepper">
+<li><button aria-current="step" class="step-button active" data-step="1" data-step-index="0">Approach</button></li>
+<li><button class="step-button" data-step="2" data-step-index="1">Stick &amp; activate</button></li>
+<li><button class="step-button" data-step="3" data-step-index="2">Rearrange</button></li>
+<li><button class="step-button" data-step="4" data-step-index="3">Release</button></li>
+</ol>
+<div class="nav-row">
+<button class="nav-button" id="backBtn" type="button">← Back</button>
+<button class="nav-button primary" id="nextBtn" type="button">Next step →</button>
+<button class="nav-button" id="resetBtn" type="button">Reset</button>
+</div>
+<p class="keyboard-hint">Keyboard: use ← and → to change steps; press R to reset.</p>
+</section>
+<div aria-live="polite" class="lesson-grid" id="lesson" role="tabpanel">
+<section aria-labelledby="flowTitle" class="card">
+<span class="live-label">Current molecule location</span>
+<h2 class="section-title" id="flowTitle">Where are the molecules?</h2>
+<p class="progress-summary" id="progressSummary"></p>
+<div class="flow-stage">
+<div class="zone gas-zone">
+<div class="zone-head"><span class="zone-title">Exhaust gas</span><span class="zone-tag">before contact</span></div>
+<div class="molecules" id="gas"></div>
+</div>
+<div aria-hidden="true" class="flow-arrow"></div>
+<div class="zone surface-zone">
+<div class="zone-head"><span class="zone-title">On the catalyst</span><span class="zone-tag">temporary bonds</span></div>
+<div class="molecules" id="surfaceMols"></div>
+<div class="surface-strip" id="status">Pt / Pd / Rh surface: open active sites</div>
+</div>
+<div aria-hidden="true" class="flow-arrow"></div>
+<div class="zone products-zone">
+<div class="zone-head"><span class="zone-title">Leaving the converter</span><span class="zone-tag">products</span></div>
+<div class="molecules" id="products"></div>
 </div>
 </div>
-
-<div class="card">
-<div class="stage">
-<div class="zone gas"><div class="label">Exhaust gas before catalyst</div><div id="gas" class="mols"></div></div>
-<div class="zone surfzone"><div class="label">Temporarily stuck on metal surface</div><div id="surfaceMols" class="mols"></div></div>
-<div class="surface" id="status">Pt / Pd / Rh metal surface: open active sites</div>
-<div class="zone products"><div class="label">Products leaving catalyst</div><div id="products" class="mols"></div></div>
-</div>
-</div>
-
-<div class="card two">
-<div>
-<div id="stepTitle" class="title"></div>
+</section>
+<section aria-labelledby="stepTitle" class="card step-card">
+<p class="step-kicker" id="stepKicker"></p>
+<h2 id="stepTitle"></h2>
 <p id="stepText"></p>
-<div id="equation" class="eq"></div>
-<div class="note"><strong>What the catalyst is doing right now:</strong><div id="chips" class="chips"></div></div>
+<div class="equation-box">
+<div class="equation-line"><span>Overall balanced conversion</span><div class="equation" id="overallEquation"></div></div>
+<div class="equation-line"><span>What this step emphasizes</span><div class="equation" id="equation"></div></div>
 </div>
-<div class="atomicBox">
-<h2 style="font-size:1.1rem;margin:0 0 8px">Atomic view of one catalytic site</h2>
-<svg id="svg" viewBox="0 0 420 280" aria-label="Atomic reaction diagram"></svg>
-<div id="caption" class="foot" style="margin-top:8px"></div>
-<div class="legend">
-<span><span class="sw" style="background:#30363d"></span>Carbon</span>
-<span><span class="sw" style="background:#d94848"></span>Oxygen</span>
-<span><span class="sw" style="background:#e8eef6"></span>Hydrogen</span>
-<span><span class="sw" style="background:#7a8390"></span>Metal</span>
-<span><span class="dash"></span>Temporary metal bond</span>
+<div class="action-note"><strong>The metal surface is:</strong><div class="chips" id="chips"></div></div>
+<div class="impact-card">
+<div class="impact-label">Why this exhaust change matters</div>
+<p id="impactText"></p>
+<p class="product-note" id="productNote"></p>
 </div>
+</section>
 </div>
+<div class="graph-grid">
+<section aria-labelledby="atomicTitleHeading" class="card">
+<div class="chart-header"><div><h2 class="section-title" id="atomicTitleHeading">Atomic view of one surface region</h2><p class="section-sub">Dashed lines are temporary interactions with the metal.</p></div><span class="chart-kicker">microscopic view</span></div>
+<div class="atomic-wrap">
+<svg aria-labelledby="atomicSvgTitle atomicSvgDesc" id="atomicSvg" role="img" viewbox="0 0 500 320">
+<title id="atomicSvgTitle">Atomic catalyst surface diagram</title>
+<desc id="atomicSvgDesc">Atoms approach, bind to, react on, and leave a metal catalyst surface.</desc>
+</svg>
 </div>
-
-<div class="card counters">
-<div class="counter"><strong id="metal">0</strong><span class="small">metal atoms consumed</span></div>
-<div class="counter"><strong id="cycles">0</strong><span class="small">completed cycles</span></div>
+<p class="chart-caption" id="caption"></p>
+<div aria-label="Atomic diagram legend" class="legend">
+<span class="legend-item"><span class="swatch carbon"></span>Carbon</span>
+<span class="legend-item"><span class="swatch oxygen"></span>Oxygen</span>
+<span class="legend-item"><span class="swatch hydrogen"></span>Hydrogen</span>
+<span class="legend-item"><span class="swatch nitrogen"></span>Nitrogen</span>
+<span class="legend-item"><span class="swatch metal"></span>Metal site</span>
 </div>
-
-<div class="card takeaway">
-<strong>Core teaching idea:</strong> the metal is involved temporarily, like a tiny molecular workbench. It holds reactants in a useful orientation, weakens bonds, helps atoms rearrange, releases products, and is regenerated.
+</section>
+<section aria-labelledby="energyTitle" class="card">
+<div class="chart-header"><div><h2 class="section-title" id="energyTitle">Why the reaction becomes easier</h2><p class="section-sub">A catalyst offers a lower-barrier pathway.</p></div><span class="chart-kicker">energy graph</span></div>
+<div class="energy-wrap">
+<svg aria-labelledby="energySvgTitle energySvgDesc" id="energySvg" role="img" viewbox="0 0 520 300">
+<title id="energySvgTitle">Qualitative reaction energy profile with and without a catalyst</title>
+<desc id="energySvgDesc">Both pathways begin and end at the same energy. The uncatalyzed pathway has a higher barrier than the multistep catalyzed pathway.</desc>
+<rect fill="#6c4aa0" height="220" id="energyBand" opacity=".08" rx="12" width="74" x="58" y="26"></rect>
+<line stroke="#7b8794" stroke-width="2" x1="58" x2="486" y1="244" y2="244"></line>
+<line stroke="#7b8794" stroke-width="2" x1="58" x2="58" y1="244" y2="28"></line>
+<text fill="#5c6876" font-size="14" font-weight="750" text-anchor="middle" x="270" y="282">reaction progress →</text>
+<text fill="#5c6876" font-size="14" font-weight="750" text-anchor="middle" transform="rotate(-90 20 138)" x="20" y="138">energy →</text>
+<path d="M72 188 C134 188 150 43 260 43 S388 222 472 222" fill="none" stroke="#7b838c" stroke-linecap="round" stroke-width="5"></path>
+<path d="M72 188 C116 188 123 127 165 127 S217 180 252 164 C292 146 297 109 342 109 S402 222 472 222" fill="none" stroke="#6c4aa0" stroke-linecap="round" stroke-width="5"></path>
+<circle cx="72" cy="188" fill="#1e2935" r="5"></circle>
+<circle cx="472" cy="222" fill="#1e2935" r="5"></circle>
+<text fill="#394553" font-size="13" font-weight="800" x="76" y="174">reactants</text>
+<text fill="#394553" font-size="13" font-weight="800" text-anchor="end" x="465" y="241">products</text>
+<text fill="#626b75" font-size="12" font-weight="800" text-anchor="middle" x="254" y="34">without catalyst: high barrier</text>
+<text fill="#593b85" font-size="12" font-weight="850" text-anchor="middle" x="341" y="99">with catalyst: lower steps</text>
+<text fill="#593b85" font-size="12" font-weight="900" id="energyStep" text-anchor="middle" x="95" y="64">STEP 1</text>
+</svg>
 </div>
+<div class="legend"><span class="legend-item"><span class="line-swatch high"></span>No catalyst</span><span class="legend-item"><span class="line-swatch low"></span>With catalyst</span></div>
+<p class="energy-message" id="energyMessage"></p>
+<p class="chart-caption">Qualitative only: the catalyst changes the pathway and rate, not the starting or ending energy.</p>
+</section>
 </div>
-
-<script>
-let reaction="co", step=0, cycleCount=0;
-const data={
-co:[
-{t:"1. CO and O₂ approach the catalyst",x:"Carbon monoxide and oxygen are in the exhaust stream. On their own, they may react slowly. The catalyst provides a surface that gives them a lower-energy pathway.",e:"2 CO + O₂ → 2 CO₂",g:["CO","O2"],s:[],p:[],st:"Pt / Pd metal surface: open active sites",c:["open metal sites","reactants approaching","no product yet"],cap:"Before adsorption, the molecules are still free in the gas phase. They have not yet been positioned or activated by the metal surface."},
-{t:"2. Reactants stick to the metal surface",x:"CO sticks to the metal. O₂ also sticks and becomes easier to split into separate oxygen atoms. The metal holds molecules close and in a reactive orientation.",e:"CO* + O* on metal surface",g:[],s:["CO*","O*","O*"],p:[],st:"Surface occupied: CO and O are temporarily bound",c:["adsorbing molecules","holding them close","weakening O=O bond","orienting reactants"],cap:"The dashed green lines show temporary interactions with the metal. O₂ is pulled apart on the surface, making oxygen much more available for reaction."},
-{t:"3. Surface reaction",x:"The adsorbed oxygen atom is close to carbon monoxide. Because the surface helped activate the molecules, the atoms can rearrange to form CO₂ more easily.",e:"CO* + O* → CO₂*",g:[],s:["CO2*"],p:[],st:"Surface reaction happening",c:["bringing atoms together","lowering activation energy","forming new bonds"],cap:"This is the key moment: the catalyst does not become part of CO₂, but it makes carbon and oxygen much more able to connect."},
-{t:"4. CO₂ leaves; metal is regenerated",x:"CO₂ detaches and flows away. The metal atom is left behind in a usable state, so the same site can catalyze another cycle.",e:"CO₂* → CO₂ + open metal site",g:[],s:[],p:["CO2"],st:"Pt / Pd metal surface: open again",c:["releasing product","metal site restored","ready for next cycle"],cap:"The product no longer needs the surface, so it leaves. The catalyst ends this cycle usable again — that is why it is not consumed."}
-],
-hc:[
-{t:"1. Hydrocarbon and O₂ approach the catalyst",x:"A hydrocarbon, shown here as propane-like C₃H₈, reaches the catalyst along with oxygen. Many exhaust hydrocarbons can be oxidized this way.",e:"C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O",g:["C3H8","O2","O2"],s:[],p:[],st:"Pt / Pd metal surface: open active sites",c:["open metal sites","hydrocarbon approaching","oxygen approaching"],cap:"The hydrocarbon and oxygen begin in the gas phase. By themselves, they are not yet arranged for the easiest possible reaction."},
-{t:"2. Hydrocarbon and oxygen stick",x:"The hydrocarbon and oxygen bind temporarily to the metal. This helps weaken C–H and O=O bonds, making oxidation easier.",e:"C₃H₈* + O* atoms on metal surface",g:[],s:["C3H8*","O*","O*"],p:[],st:"Surface occupied: hydrocarbon and oxygen are temporarily bound",c:["adsorbing hydrocarbon","splitting oxygen","weakening bonds","holding orientation"],cap:"The surface acts like a landing pad and reaction platform. The hydrocarbon is pinned in place while oxygen is activated nearby."},
-{t:"3. Hydrocarbon is oxidized",x:"On the surface, carbon atoms are pushed toward CO₂ and hydrogen atoms are pushed toward H₂O. The metal helps many small bond changes happen more easily than in free gas.",e:"C → CO₂ and H → H₂O",g:[],s:["CO2*","CO2*","H2O*"],p:[],st:"Surface reaction happening",c:["breaking old bonds","forming C–O bonds","forming O–H bonds","rearranging atoms"],cap:"This step is simplified, but the big intuition is right: the surface helps break and remake bonds in a controlled way."},
-{t:"4. CO₂ and H₂O leave; metal is regenerated",x:"The products detach from the surface. The metal helped organize the chemistry but did not become part of the final products.",e:"C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O",g:[],s:[],p:["CO2","CO2","CO2","H2O","H2O","H2O","H2O"],st:"Pt / Pd metal surface: open again",c:["releasing products","surface restored","cycle repeatable"],cap:"Once products are formed, they detach. The catalytic site is still there, ready to help another hydrocarbon molecule react."}
-]};
-
-function A(l,cls){return `<span class="atom ${cls}">${l}</span>`}
-function mol(type){
- const stuck=type.includes("*")?" stuck":"", clean=type.replace("*",""); let inner="";
- if(clean==="CO")inner=`${A("C","C")}<span class="bond"></span>${A("O","O")}`;
- if(clean==="O2")inner=`${A("O","O")}<span class="bond"></span>${A("O","O")}`;
- if(clean==="O")inner=`${A("O","O")}`;
- if(clean==="CO2")inner=`${A("O","O")}<span class="bond"></span>${A("C","C")}<span class="bond"></span>${A("O","O")}`;
- if(clean==="H2O")inner=`${A("H","H")}<span class="bond"></span>${A("O","O")}<span class="bond"></span>${A("H","H")}`;
- if(clean==="C3H8")inner=`${A("H","H")}${A("C","C")}<span class="bond"></span>${A("C","C")}<span class="bond"></span>${A("C","C")}${A("H","H")}`;
- return `<div class="mol${stuck}">${inner}<span>${type}</span></div>`
-}
-function list(id,arr){document.getElementById(id).innerHTML=arr.length?arr.map(mol).join(""):`<span class="small">Nothing here at this step.</span>`}
-function C(cx,cy,r,fill,label,tc="#fff"){return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="rgba(0,0,0,.18)" stroke-width="2"></circle><text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="16" font-weight="800" fill="${tc}">${label}</text>`}
-function L(x1,y1,x2,y2,col="#6b7280",w=4,d=""){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" stroke-linecap="round" ${d?`stroke-dasharray="${d}"`:""}></line>`}
-function T(x,y,txt,size=14,col="#44515f",weight="700",anchor="start"){return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-size="${size}" font-weight="${weight}" fill="${col}">${txt}</text>`}
-function Arrow(x1,y1,x2,y2,col="#4f9d72"){return `<defs><marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="${col}"></polygon></marker></defs><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="4" stroke-linecap="round" marker-end="url(#arr)"></line>`}
-function metalSurf(){
- let out="",xs=[60,120,180,240,300,360]; xs.forEach(x=>out+=C(x,220,22,"#7a8390","M"));
- return out+`<rect x="25" y="210" width="370" height="40" rx="12" fill="rgba(122,131,144,.15)"></rect>`+T(30,268,"metal surface: Pt / Pd / Rh sites",13,"#55616f","700")
-}
-function drawCO(){
- let s=`<rect width="420" height="280" fill="transparent"></rect>`+metalSurf();
- if(step===0){s+=T(44,34,"Gas-phase molecules",15,"#374151","800")+C(115,90,20,"#30363d","C")+C(165,90,20,"#d94848","O")+L(135,90,145,90)+T(140,124,"CO",14,"#4b5563","700","middle")+C(285,82,20,"#d94848","O")+C(335,82,20,"#d94848","O")+L(305,82,315,82)+T(310,116,"O₂",14,"#4b5563","700","middle")+Arrow(150,130,170,182)+Arrow(315,122,275,180)+T(210,165,"molecules move toward the surface",13,"#4f9d72","700","middle")}
- if(step===1){s+=T(30,34,"Adsorption and activation",15,"#374151","800")+C(145,132,20,"#30363d","C")+C(190,122,20,"#d94848","O")+L(162,128,173,125)+L(145,150,120,202,"#4f9d72",3,"6 5")+L(190,142,180,202,"#4f9d72",3,"6 5")+T(170,165,"CO adsorbed",13,"#4b5563","700","middle")+C(280,128,20,"#d94848","O")+C(330,128,20,"#d94848","O")+L(295,128,315,128,"#6b7280",2,"5 5")+L(280,148,240,202,"#4f9d72",3,"6 5")+L(330,148,300,202,"#4f9d72",3,"6 5")+T(305,165,"O₂ bond weakened",13,"#4b5563","700","middle")+T(210,66,"surface orients molecules and weakens bonds",13,"#4f9d72","800","middle")}
- if(step===2){s+=T(30,34,"Surface reaction",15,"#374151","800")+C(175,124,20,"#d94848","O")+C(220,124,20,"#30363d","C")+C(265,124,20,"#d94848","O")+L(192,124,203,124)+L(237,124,248,124)+L(220,145,210,202,"#4f9d72",3,"6 5")+T(220,92,"CO₂ forming on the surface",14,"#4b5563","800","middle")+T(220,168,"atoms are in a product-like arrangement",13,"#4f9d72","700","middle")}
- if(step===3){s+=T(30,34,"Desorption: product leaves",15,"#374151","800")+C(185,90,20,"#d94848","O")+C(230,90,20,"#30363d","C")+C(275,90,20,"#d94848","O")+L(202,90,213,90)+L(247,90,258,90)+Arrow(230,120,230,170)+T(230,145,"CO₂ leaves",13,"#4f9d72","700","middle")+T(220,190,"metal site open again",13,"#4b5563","800","middle")}
- document.getElementById("svg").innerHTML=s
-}
-function drawHC(){
- let s=`<rect width="420" height="280" fill="transparent"></rect>`+metalSurf();
- if(step===0){s+=T(35,34,"Gas-phase hydrocarbon and oxygen",15,"#374151","800")+C(95,88,18,"#30363d","C")+C(140,88,18,"#30363d","C")+C(185,88,18,"#30363d","C")+L(113,88,122,88)+L(158,88,167,88)+C(75,58,14,"#e8eef6","H","#344054")+C(75,118,14,"#e8eef6","H","#344054")+C(205,58,14,"#e8eef6","H","#344054")+C(205,118,14,"#e8eef6","H","#344054")+T(140,145,"hydrocarbon",13,"#4b5563","700","middle")+C(300,88,18,"#d94848","O")+C(345,88,18,"#d94848","O")+L(318,88,327,88)+T(322,118,"O₂",13,"#4b5563","700","middle")+Arrow(145,155,165,182)+Arrow(322,130,280,182)}
- if(step===1){s+=T(35,34,"Adsorption and bond activation",15,"#374151","800")+C(115,125,18,"#30363d","C")+C(160,125,18,"#30363d","C")+C(205,125,18,"#30363d","C")+L(133,125,142,125)+L(178,125,187,125)+L(115,143,90,202,"#4f9d72",3,"6 5")+L(160,143,150,202,"#4f9d72",3,"6 5")+L(205,143,210,202,"#4f9d72",3,"6 5")+T(160,160,"hydrocarbon held to surface",13,"#4b5563","700","middle")+C(292,125,18,"#d94848","O")+C(338,125,18,"#d94848","O")+L(292,143,270,202,"#4f9d72",3,"6 5")+L(338,143,330,202,"#4f9d72",3,"6 5")+L(309,125,321,125,"#6b7280",2,"5 5")+T(315,160,"O₂ activated / splitting",13,"#4b5563","700","middle")}
- if(step===2){s+=T(40,34,"Rearranging bonds toward products",15,"#374151","800")+C(110,120,18,"#d94848","O")+C(155,120,18,"#30363d","C")+C(200,120,18,"#d94848","O")+L(127,120,138,120)+L(172,120,183,120)+T(155,154,"CO₂-forming fragment",13,"#4b5563","700","middle")+C(285,120,18,"#e8eef6","H","#344054")+C(330,120,18,"#d94848","O")+C(375,120,18,"#e8eef6","H","#344054")+L(302,120,313,120)+L(347,120,358,120)+T(330,154,"H₂O-forming fragment",13,"#4b5563","700","middle")+L(155,140,150,202,"#4f9d72",3,"6 5")+L(330,140,330,202,"#4f9d72",3,"6 5")+T(210,78,"surface helps many bond changes happen",13,"#4f9d72","800","middle")}
- if(step===3){s+=T(35,34,"Products leave; catalyst remains",15,"#374151","800")+C(120,95,18,"#d94848","O")+C(165,95,18,"#30363d","C")+C(210,95,18,"#d94848","O")+L(137,95,148,95)+L(182,95,193,95)+T(165,130,"CO₂",13,"#4b5563","700","middle")+C(285,95,18,"#e8eef6","H","#344054")+C(330,95,18,"#d94848","O")+C(375,95,18,"#e8eef6","H","#344054")+L(302,95,313,95)+L(347,95,358,95)+T(330,130,"H₂O",13,"#4b5563","700","middle")+Arrow(165,140,165,178)+Arrow(330,140,330,178)+T(220,190,"surface ready again",13,"#4b5563","800","middle")}
- document.getElementById("svg").innerHTML=s
-}
-function render(){
- const d=data[reaction][step];
- document.getElementById("stepTitle").textContent=d.t;
- document.getElementById("stepText").textContent=d.x;
- document.getElementById("equation").textContent=d.e;
- document.getElementById("status").textContent=d.st;
- document.getElementById("caption").textContent=d.cap;
- list("gas",d.g); list("surfaceMols",d.s); list("products",d.p);
- document.getElementById("chips").innerHTML=d.c.map(x=>`<span class="chip">${x}</span>`).join("");
- document.getElementById("metal").textContent="0"; document.getElementById("cycles").textContent=cycleCount;
- document.getElementById("coBtn").classList.toggle("active",reaction==="co");
- document.getElementById("hcBtn").classList.toggle("active",reaction==="hc");
- reaction==="co"?drawCO():drawHC();
-}
-function setReaction(r){reaction=r;step=0;cycleCount=0;render()}
-function next(){if(step===3){step=0;cycleCount++}else step++;render()}
-function prev(){step=step===0?3:step-1;render()}
-function reset(){step=0;cycleCount=0;render()}
-render();
-</script>
+<section aria-labelledby="balanceTitle" class="card balance-card">
+<h2 class="section-title" id="balanceTitle">Balanced before-and-after particle graph</h2>
+<p class="section-sub">Bar length shows the number of molecules in the written equation—not a measured tailpipe concentration.</p>
+<div class="balance-grid">
+<div class="balance-side active" id="beforeSide"><h3>Entering the reaction</h3><div id="beforeGraph"></div></div>
+<div aria-hidden="true" class="balance-arrow">→</div>
+<div class="balance-side" id="afterSide"><h3>Leaving the reaction</h3><div id="afterGraph"></div></div>
+</div>
+<div class="graph-legend"><span class="graph-key">regulated pollutant / fuel</span><span class="graph-key helper">other reactant</span><span class="graph-key product">product</span></div>
+<div aria-label="Atom conservation check" class="atom-ledger" id="atomLedger"></div>
+<p class="balance-note" id="balanceNote"></p>
+</section>
+<section aria-label="Catalyst cycle counters" class="counter-grid">
+<div class="counter"><strong id="metal">0</strong><span>metal atoms used up</span></div>
+<div class="counter"><strong id="cycles">0</strong><span>completed cycles</span></div>
+<div class="counter"><strong class="open" id="siteState">Open</strong><span>active-site status</span></div>
+</section>
+<section aria-labelledby="checkTitle" class="card quiz-card">
+<h2 class="section-title" id="checkTitle">Quick check</h2>
+<p class="quiz-question">Which statement best explains why the metal is a catalyst?</p>
+<div class="quiz-options">
+<button class="quiz-option" data-answer="wrong" type="button">It supplies metal atoms that become part of every product.</button>
+<button class="quiz-option" data-answer="correct" type="button">It provides a lower-energy surface pathway and is regenerated.</button>
+<button class="quiz-option" data-answer="wrong" type="button">It creates new carbon, oxygen, or nitrogen atoms.</button>
+</div>
+<p aria-live="polite" class="quiz-feedback" id="quizFeedback"></p>
+</section>
+<aside class="takeaway"><strong>Core teaching idea</strong>The metal is a reusable molecular workbench: reactants bind temporarily, bonds become easier to rearrange, products leave, and the active site becomes available again.</aside>
+<details class="model-notes">
+<summary>Model limits and important caveats</summary>
+<ul>
+<li>Real converters contain huge numbers of active sites on a porous washcoat; these drawings show only one small surface region.</li>
+<li>The surface mechanisms are simplified. Real reaction pathways can involve several intermediates and neighboring sites.</li>
+<li>The catalyst lowers the barrier rather than removing it; real converters must warm up before they reach high effectiveness.</li>
+<li>“Less harmful” does not mean harmless. Catalytic converters do not eliminate carbon dioxide, and CO₂ remains a greenhouse gas.</li>
+<li>This model represents a gasoline-engine three-way catalyst. Other engines can use different after-treatment systems.</li>
+</ul>
+</details>
+</main>
+<script src="app.js"></script>
 </body>
 </html>
