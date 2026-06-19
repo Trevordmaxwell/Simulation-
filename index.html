@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Interactive teaching model showing how a three-way catalytic converter transforms carbon monoxide, unburned hydrocarbons, and nitrogen oxides on a reusable metal surface." name="description"/>
+<meta content="Interactive teaching model of a gasoline three-way catalytic converter, with reaction steps, energy profile, balanced particle graph, and atom conservation." name="description"/>
 <title>How a Catalytic Converter Cleans Exhaust</title>
 <link href="styles.css" rel="stylesheet"/>
 </head>
@@ -13,156 +13,61 @@
 <header class="hero">
 <p class="kicker">Interactive chemistry model</p>
 <h1>How a catalytic converter cleans exhaust</h1>
-<p class="hero-copy">Follow atoms from harmful combustion by-products to less harmful compounds. The model connects the big-picture exhaust change to the tiny surface events that make it happen.</p>
-<div aria-label="The three jobs of a three-way catalytic converter" class="overview">
-<div class="overview-item"><span class="number-badge">1</span><strong>Oxidize carbon monoxide</strong>Turns toxic CO into CO₂.<span class="mini-eq">CO + O → CO₂</span></div>
-<div class="overview-item"><span class="number-badge">2</span><strong>Oxidize unburned fuel</strong>Turns hydrocarbons into CO₂ and H₂O.<span class="mini-eq">HC + O₂ → CO₂ + H₂O</span></div>
-<div class="overview-item"><span class="number-badge">3</span><strong>Reduce nitrogen oxides</strong>Returns nitrogen atoms mainly to N₂.<span class="mini-eq">NOₓ → N₂</span></div>
+<p class="lede">Follow atoms from pollutants formed during combustion to less harmful compounds. The model links the big-picture exhaust change to the small surface events that make it happen.</p>
+<div aria-label="Three jobs of a gasoline three-way catalytic converter" class="overview">
+<article><span class="badge">1</span><b>Oxidize carbon monoxide</b>Convert toxic CO into CO₂.<span class="mini-eq">CO + O → CO₂</span></article>
+<article><span class="badge">2</span><b>Oxidize unburned fuel</b>Convert hydrocarbons into CO₂ and H₂O.<span class="mini-eq">HC + O₂ → CO₂ + H₂O</span></article>
+<article><span class="badge">3</span><b>Reduce nitrogen oxides</b>Return nitrogen atoms mainly to N₂.<span class="mini-eq">NOₓ → N₂</span></article>
 </div>
 </header>
-<section aria-labelledby="controlsTitle" class="card controls">
-<h2 class="section-title" id="controlsTitle">Choose a reaction, then move through the surface cycle</h2>
-<p class="section-sub">The balanced-particle graph and atom ledger update with your choice.</p>
-<div aria-label="Reaction example" class="reaction-tabs" role="tablist">
-<button aria-controls="lesson" aria-selected="true" class="reaction-tab" data-reaction="co" id="coBtn" role="tab">Carbon monoxide<span>CO oxidation</span></button>
-<button aria-controls="lesson" aria-selected="false" class="reaction-tab" data-reaction="hc" id="hcBtn" role="tab">Unburned hydrocarbon<span>fuel oxidation</span></button>
-<button aria-controls="lesson" aria-selected="false" class="reaction-tab" data-reaction="nox" id="noxBtn" role="tab">Nitrogen oxides<span>NOₓ reduction</span></button>
+<section aria-labelledby="controlTitle" class="card">
+<h2 class="title" id="controlTitle">Choose a reaction, then follow one catalytic cycle</h2>
+<p class="sub">The molecule flow, energy explanation, particle graph, and atom ledger update together.</p>
+<div aria-label="Reaction example" class="tabs" role="tablist">
+<button aria-selected="true" class="tab" data-reaction="co" id="coTab" role="tab">Carbon monoxide<small>CO oxidation</small></button>
+<button aria-selected="false" class="tab" data-reaction="hc" id="hcTab" role="tab">Unburned hydrocarbon<small>fuel oxidation</small></button>
+<button aria-selected="false" class="tab" data-reaction="nox" id="noxTab" role="tab">Nitrogen oxides<small>NO reduction</small></button>
 </div>
-<ol aria-label="Catalytic cycle steps" class="stepper">
-<li><button aria-current="step" class="step-button active" data-step="1" data-step-index="0">Approach</button></li>
-<li><button class="step-button" data-step="2" data-step-index="1">Stick &amp; activate</button></li>
-<li><button class="step-button" data-step="3" data-step-index="2">Rearrange</button></li>
-<li><button class="step-button" data-step="4" data-step-index="3">Release</button></li>
+<ol aria-label="Catalytic cycle steps" class="steps">
+<li><button aria-current="step" class="step active" data-number="1" data-step="0">Approach</button></li>
+<li><button class="step" data-number="2" data-step="1">Stick &amp; activate</button></li>
+<li><button class="step" data-number="3" data-step="2">Rearrange</button></li>
+<li><button class="step" data-number="4" data-step="3">Release</button></li>
 </ol>
-<div class="nav-row">
-<button class="nav-button" id="backBtn" type="button">← Back</button>
-<button class="nav-button primary" id="nextBtn" type="button">Next step →</button>
-<button class="nav-button" id="resetBtn" type="button">Reset</button>
-</div>
-<p class="keyboard-hint">Keyboard: use ← and → to change steps; press R to reset.</p>
+<div class="nav"><button id="back">← Back</button><button class="primary" id="next">Next step →</button><button id="reset">Reset</button></div>
+<p class="hint">Keyboard: use ← and → for steps; press R to reset.</p>
 </section>
-<div aria-live="polite" class="lesson-grid" id="lesson" role="tabpanel">
+<div aria-live="polite" class="lesson" id="lesson" role="tabpanel">
 <section aria-labelledby="flowTitle" class="card">
-<span class="live-label">Current molecule location</span>
-<h2 class="section-title" id="flowTitle">Where are the molecules?</h2>
-<p class="progress-summary" id="progressSummary"></p>
-<div class="flow-stage">
-<div class="zone gas-zone">
-<div class="zone-head"><span class="zone-title">Exhaust gas</span><span class="zone-tag">before contact</span></div>
-<div class="molecules" id="gas"></div>
-</div>
-<div aria-hidden="true" class="flow-arrow"></div>
-<div class="zone surface-zone">
-<div class="zone-head"><span class="zone-title">On the catalyst</span><span class="zone-tag">temporary bonds</span></div>
-<div class="molecules" id="surfaceMols"></div>
-<div class="surface-strip" id="status">Pt / Pd / Rh surface: open active sites</div>
-</div>
-<div aria-hidden="true" class="flow-arrow"></div>
-<div class="zone products-zone">
-<div class="zone-head"><span class="zone-title">Leaving the converter</span><span class="zone-tag">products</span></div>
-<div class="molecules" id="products"></div>
-</div>
+<h2 class="title" id="flowTitle">Where are the molecules?</h2>
+<p class="sub" id="progress"></p>
+<div class="flow">
+<div class="zone"><div class="zone-head"><span>Exhaust gas</span><span>before contact</span></div><div class="mols" id="gas"></div></div>
+<div aria-hidden="true" class="arrow">↓</div>
+<div class="zone surface"><div class="zone-head"><span>On the catalyst</span><span>temporary bonds</span></div><div class="mols" id="surfaceMols"></div><div class="metal-strip" id="surfaceStatus"></div></div>
+<div aria-hidden="true" class="arrow">↓</div>
+<div class="zone products"><div class="zone-head"><span>Leaving the converter</span><span>products</span></div><div class="mols" id="products"></div></div>
 </div>
 </section>
 <section aria-labelledby="stepTitle" class="card step-card">
-<p class="step-kicker" id="stepKicker"></p>
-<h2 id="stepTitle"></h2>
-<p id="stepText"></p>
-<div class="equation-box">
-<div class="equation-line"><span>Overall balanced conversion</span><div class="equation" id="overallEquation"></div></div>
-<div class="equation-line"><span>What this step emphasizes</span><div class="equation" id="equation"></div></div>
+<p class="step-kicker" id="stepKicker"></p><h2 id="stepTitle"></h2><p id="stepText"></p>
+<div class="eqbox">
+<div class="eqline"><span>Overall balanced conversion</span><div class="equation" id="overall"></div></div>
+<div class="eqline"><span>This step emphasizes</span><div class="equation" id="stepEq"></div></div>
 </div>
-<div class="action-note"><strong>The metal surface is:</strong><div class="chips" id="chips"></div></div>
-<div class="impact-card">
-<div class="impact-label">Why this exhaust change matters</div>
-<p id="impactText"></p>
-<p class="product-note" id="productNote"></p>
-</div>
+<div class="surface-action"><b>The metal surface is:</b><div class="chips" id="chips"></div></div>
+<div class="impact"><b>Why the change matters</b><p id="impact"></p><p class="caveat" id="productCaveat"></p></div>
 </section>
 </div>
 <div class="graph-grid">
-<section aria-labelledby="atomicTitleHeading" class="card">
-<div class="chart-header"><div><h2 class="section-title" id="atomicTitleHeading">Atomic view of one surface region</h2><p class="section-sub">Dashed lines are temporary interactions with the metal.</p></div><span class="chart-kicker">microscopic view</span></div>
-<div class="atomic-wrap">
-<svg aria-labelledby="atomicSvgTitle atomicSvgDesc" id="atomicSvg" role="img" viewbox="0 0 500 320">
-<title id="atomicSvgTitle">Atomic catalyst surface diagram</title>
-<desc id="atomicSvgDesc">Atoms approach, bind to, react on, and leave a metal catalyst surface.</desc>
-</svg>
+<section aria-labelledby="microTitle" class="card"><div class="graph-head"><div><h2 class="title" id="microTitle">Atomic view of one surface region</h2><p class="sub">Representative molecules, not every simultaneous collision.</p></div><span class="tag">microscopic view</span></div><div class="micro"><svg aria-labelledby="microSvgTitle microSvgDesc" id="microSvg" role="img" viewbox="0 0 520 310"><title id="microSvgTitle">Molecules interacting with a catalytic metal surface</title><desc id="microSvgDesc">The diagram changes as reactants approach, bind, rearrange, and leave the catalyst.</desc></svg></div><p class="caption" id="microCaption"></p><div class="legend"><span><i class="swatch C"></i>Carbon</span><span><i class="swatch O"></i>Oxygen</span><span><i class="swatch H"></i>Hydrogen</span><span><i class="swatch N"></i>Nitrogen</span><span><i class="swatch" style="background:var(--metal)"></i>Metal site</span></div></section>
+<section aria-labelledby="energyTitle" class="card"><div class="graph-head"><div><h2 class="title" id="energyTitle">Why the reaction becomes easier</h2><p class="sub">A catalyst offers a lower-barrier pathway.</p></div><span class="tag">energy graph</span></div><div class="energy"><svg aria-labelledby="energySvgTitle energySvgDesc" role="img" viewbox="0 0 520 300"><title id="energySvgTitle">Qualitative energy profile with and without a catalyst</title><desc id="energySvgDesc">The catalyzed path has smaller energy barriers while reactant and product energies stay the same.</desc><rect fill="#6d4ca0" height="220" id="energyBand" opacity=".08" rx="12" width="82" x="58" y="25"></rect><line stroke="#7b8794" stroke-width="2" x1="58" x2="486" y1="244" y2="244"></line><line stroke="#7b8794" stroke-width="2" x1="58" x2="58" y1="244" y2="28"></line><text fill="#5e6a78" font-size="14" font-weight="750" text-anchor="middle" x="270" y="282">reaction progress →</text><text fill="#5e6a78" font-size="14" font-weight="750" text-anchor="middle" transform="rotate(-90 20 138)" x="20" y="138">energy →</text><path d="M72 188 C134 188 150 43 260 43 S388 222 472 222" fill="none" stroke="#7b838c" stroke-linecap="round" stroke-width="5"></path><path d="M72 188 C116 188 123 127 165 127 S217 180 252 164 C292 146 297 109 342 109 S402 222 472 222" fill="none" stroke="#6d4ca0" stroke-linecap="round" stroke-width="5"></path><circle cx="72" cy="188" fill="#1f2a37" r="5"></circle><circle cx="472" cy="222" fill="#1f2a37" r="5"></circle><text fill="#394553" font-size="13" font-weight="800" x="76" y="174">reactants</text><text fill="#394553" font-size="13" font-weight="800" text-anchor="end" x="465" y="241">products</text><text fill="#626b75" font-size="12" font-weight="800" text-anchor="middle" x="254" y="34">without catalyst: high barrier</text><text fill="#593b85" font-size="12" font-weight="850" text-anchor="middle" x="341" y="99">with catalyst: lower steps</text><text fill="#593b85" font-size="12" font-weight="900" id="energyLabel" text-anchor="middle" x="99" y="65">STEP 1</text></svg></div><div class="legend"><span><i class="line" style="border-color:#7b838c"></i>No catalyst</span><span><i class="line" style="border-color:var(--purple)"></i>With catalyst</span></div><p class="energy-note" id="energyNote"></p><p class="caption">Qualitative only: the catalyst changes the pathway and rate, not the starting or ending energy.</p></section>
 </div>
-<p class="chart-caption" id="caption"></p>
-<div aria-label="Atomic diagram legend" class="legend">
-<span class="legend-item"><span class="swatch carbon"></span>Carbon</span>
-<span class="legend-item"><span class="swatch oxygen"></span>Oxygen</span>
-<span class="legend-item"><span class="swatch hydrogen"></span>Hydrogen</span>
-<span class="legend-item"><span class="swatch nitrogen"></span>Nitrogen</span>
-<span class="legend-item"><span class="swatch metal"></span>Metal site</span>
-</div>
-</section>
-<section aria-labelledby="energyTitle" class="card">
-<div class="chart-header"><div><h2 class="section-title" id="energyTitle">Why the reaction becomes easier</h2><p class="section-sub">A catalyst offers a lower-barrier pathway.</p></div><span class="chart-kicker">energy graph</span></div>
-<div class="energy-wrap">
-<svg aria-labelledby="energySvgTitle energySvgDesc" id="energySvg" role="img" viewbox="0 0 520 300">
-<title id="energySvgTitle">Qualitative reaction energy profile with and without a catalyst</title>
-<desc id="energySvgDesc">Both pathways begin and end at the same energy. The uncatalyzed pathway has a higher barrier than the multistep catalyzed pathway.</desc>
-<rect fill="#6c4aa0" height="220" id="energyBand" opacity=".08" rx="12" width="74" x="58" y="26"></rect>
-<line stroke="#7b8794" stroke-width="2" x1="58" x2="486" y1="244" y2="244"></line>
-<line stroke="#7b8794" stroke-width="2" x1="58" x2="58" y1="244" y2="28"></line>
-<text fill="#5c6876" font-size="14" font-weight="750" text-anchor="middle" x="270" y="282">reaction progress →</text>
-<text fill="#5c6876" font-size="14" font-weight="750" text-anchor="middle" transform="rotate(-90 20 138)" x="20" y="138">energy →</text>
-<path d="M72 188 C134 188 150 43 260 43 S388 222 472 222" fill="none" stroke="#7b838c" stroke-linecap="round" stroke-width="5"></path>
-<path d="M72 188 C116 188 123 127 165 127 S217 180 252 164 C292 146 297 109 342 109 S402 222 472 222" fill="none" stroke="#6c4aa0" stroke-linecap="round" stroke-width="5"></path>
-<circle cx="72" cy="188" fill="#1e2935" r="5"></circle>
-<circle cx="472" cy="222" fill="#1e2935" r="5"></circle>
-<text fill="#394553" font-size="13" font-weight="800" x="76" y="174">reactants</text>
-<text fill="#394553" font-size="13" font-weight="800" text-anchor="end" x="465" y="241">products</text>
-<text fill="#626b75" font-size="12" font-weight="800" text-anchor="middle" x="254" y="34">without catalyst: high barrier</text>
-<text fill="#593b85" font-size="12" font-weight="850" text-anchor="middle" x="341" y="99">with catalyst: lower steps</text>
-<text fill="#593b85" font-size="12" font-weight="900" id="energyStep" text-anchor="middle" x="95" y="64">STEP 1</text>
-</svg>
-</div>
-<div class="legend"><span class="legend-item"><span class="line-swatch high"></span>No catalyst</span><span class="legend-item"><span class="line-swatch low"></span>With catalyst</span></div>
-<p class="energy-message" id="energyMessage"></p>
-<p class="chart-caption">Qualitative only: the catalyst changes the pathway and rate, not the starting or ending energy.</p>
-</section>
-</div>
-<section aria-labelledby="balanceTitle" class="card balance-card">
-<h2 class="section-title" id="balanceTitle">Balanced before-and-after particle graph</h2>
-<p class="section-sub">Bar length shows the number of molecules in the written equation—not a measured tailpipe concentration.</p>
-<div class="balance-grid">
-<div class="balance-side active" id="beforeSide"><h3>Entering the reaction</h3><div id="beforeGraph"></div></div>
-<div aria-hidden="true" class="balance-arrow">→</div>
-<div class="balance-side" id="afterSide"><h3>Leaving the reaction</h3><div id="afterGraph"></div></div>
-</div>
-<div class="graph-legend"><span class="graph-key">regulated pollutant / fuel</span><span class="graph-key helper">other reactant</span><span class="graph-key product">product</span></div>
-<div aria-label="Atom conservation check" class="atom-ledger" id="atomLedger"></div>
-<p class="balance-note" id="balanceNote"></p>
-</section>
-<section aria-label="Catalyst cycle counters" class="counter-grid">
-<div class="counter"><strong id="metal">0</strong><span>metal atoms used up</span></div>
-<div class="counter"><strong id="cycles">0</strong><span>completed cycles</span></div>
-<div class="counter"><strong class="open" id="siteState">Open</strong><span>active-site status</span></div>
-</section>
-<section aria-labelledby="checkTitle" class="card quiz-card">
-<h2 class="section-title" id="checkTitle">Quick check</h2>
-<p class="quiz-question">Which statement best explains why the metal is a catalyst?</p>
-<div class="quiz-options">
-<button class="quiz-option" data-answer="wrong" type="button">It supplies metal atoms that become part of every product.</button>
-<button class="quiz-option" data-answer="correct" type="button">It provides a lower-energy surface pathway and is regenerated.</button>
-<button class="quiz-option" data-answer="wrong" type="button">It creates new carbon, oxygen, or nitrogen atoms.</button>
-</div>
-<p aria-live="polite" class="quiz-feedback" id="quizFeedback"></p>
-</section>
-<aside class="takeaway"><strong>Core teaching idea</strong>The metal is a reusable molecular workbench: reactants bind temporarily, bonds become easier to rearrange, products leave, and the active site becomes available again.</aside>
-<details class="model-notes">
-<summary>Model limits and important caveats</summary>
-<ul>
-<li>Real converters contain huge numbers of active sites on a porous washcoat; these drawings show only one small surface region.</li>
-<li>The surface mechanisms are simplified. Real reaction pathways can involve several intermediates and neighboring sites.</li>
-<li>The catalyst lowers the barrier rather than removing it; real converters must warm up before they reach high effectiveness.</li>
-<li>“Less harmful” does not mean harmless. Catalytic converters do not eliminate carbon dioxide, and CO₂ remains a greenhouse gas.</li>
-<li>This model represents a gasoline-engine three-way catalyst. Other engines can use different after-treatment systems.</li>
-</ul>
-</details>
+<section aria-labelledby="balanceTitle" class="card balance"><h2 class="title" id="balanceTitle">Balanced before-and-after particle graph</h2><p class="sub">Bar length shows coefficients in the written equation—not measured tailpipe concentrations.</p><div class="balance-wrap"><div class="side active" id="beforeSide"><h3>Entering the reaction</h3><div id="beforeGraph"></div></div><div aria-hidden="true" class="big-arrow">→</div><div class="side" id="afterSide"><h3>Leaving the reaction</h3><div id="afterGraph"></div></div></div><div class="bar-legend"><span class="bar-key">pollutant / fuel</span><span class="bar-key helper">other reactant</span><span class="bar-key product">product</span></div><div aria-label="Atom conservation check" class="ledger" id="ledger"></div><p class="balance-note" id="balanceNote"></p></section>
+<section aria-label="Catalyst cycle counters" class="counters"><div class="counter"><strong>0</strong><span>metal atoms used up</span></div><div class="counter"><strong id="cycles">0</strong><span>completed cycles</span></div><div class="counter"><strong class="open" id="siteState">Open</strong><span>active-site status</span></div></section>
+<section aria-labelledby="quizTitle" class="card quiz"><h2 class="title" id="quizTitle">Quick check</h2><p><b>Which statement best explains why the metal is a catalyst?</b></p><div class="quiz-options"><button data-answer="wrong">It supplies metal atoms that become part of every product.</button><button data-answer="correct">It provides a lower-energy surface pathway and is regenerated.</button><button data-answer="wrong">It creates new carbon, oxygen, or nitrogen atoms.</button></div><p aria-live="polite" class="feedback" id="feedback"></p></section>
+<aside class="takeaway"><b>Core teaching idea</b>The metal is a reusable molecular workbench: reactants bind temporarily, bonds become easier to rearrange, products leave, and the active site becomes available again.</aside>
+<details class="notes"><summary>Model limits and important caveats</summary><ul><li>Real converters contain huge numbers of active sites on a porous washcoat; this drawing shows one small region.</li><li>Surface mechanisms are simplified and may involve several intermediates and neighboring sites.</li><li>A catalyst lowers the barrier rather than removing it; real converters must warm up before reaching high effectiveness.</li><li>“Less harmful” does not mean harmless. Catalytic converters do not eliminate CO₂, which remains a greenhouse gas.</li><li>This model represents a gasoline-engine three-way catalyst operating near the proper air–fuel ratio. Other engines can use different after-treatment systems.</li></ul></details>
 </main>
 <script src="app.js"></script>
 </body>
